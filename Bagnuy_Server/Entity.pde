@@ -2,7 +2,7 @@ abstract class Entity {
   public String name;
   public int x;
   public int y;
-  public int speed = 10;
+  public int speed = 1;
   
   public Entity(int x, int y, String name) {
     this.name = name;
@@ -55,4 +55,8 @@ class Player extends Entity {
       rect(i * n + xoffset, j * n, n, n);
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> Initial Skeleton of the world.
