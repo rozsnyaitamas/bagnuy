@@ -10,6 +10,12 @@ abstract class Entity {
     this.y = y;
   }
   
+  void move(int x, int y){
+      this.x = x % world.width;
+      this.y = min(world.height-1,max(y,0));
+      System.out.println(this.x + " " + this.y);
+  }
+  
   public abstract void update();
   public abstract void draw();
 }
@@ -22,10 +28,10 @@ class Player extends Entity {
   
   public void update() {
     if (keyPressed) switch (key) {
-        case 'a': x -= speed; break;
-        case 'd': x += speed; break;
-        case 'w': y -= speed; break;
-        case 's': y += speed; break;
+        case 'a': move(x-speed, y); break;
+        case 'd': move(x+speed, y); break;
+        case 'w': move(x, y-speed); break;
+        case 's': move(x, y+speed); break;
         default: break;
     }
   }
@@ -47,9 +53,10 @@ class Player extends Entity {
     for (int i = 0; i < tilesPerScreen; i++) for (int j = 0; j < tilesPerScreen; j++) {
       
       int xFromWorld = (i + x - viewDistance) % world.width;
-      int yFromWorld = (j + y - viewDistance) % world.height;
+      int yFromWorld = (j + y - viewDistance);
       
       color c = (xFromWorld == x && yFromWorld == y)? color(255) : 
+                (yFromWorld<0 || yFromWorld> world.height-1)? color(0):
                 tileToColor(world.tiles[xFromWorld][yFromWorld]) ;
       fill(c);
       rect(i * n + xoffset, j * n, n, n);
