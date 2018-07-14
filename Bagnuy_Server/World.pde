@@ -22,7 +22,7 @@ class World {
                                        Tile.EARTH ;
     }
     
-    entities.add(new Player(50, 50, "János"));
+    entities.add(new Player(50, 350, "János"));
   }
   
   public void draw() {
